@@ -5,11 +5,11 @@ const { Router } = require('express');
 
 const router = Router();
 
-
+const routinesRoute = require("./routines.routes")
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 
-
+router.use('/routines', routinesRoute)
 
 module.exports = router;

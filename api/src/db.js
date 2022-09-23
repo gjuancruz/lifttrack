@@ -7,6 +7,8 @@ const {
 } = process.env;
 
 const modelRoutine = require('./models/Routine.js')
+const modelUser = require('./models/User.js')
+
 
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/lifttrack`, {
   logging: false, // set to console.log to see the raw SQL queries
@@ -14,6 +16,7 @@ const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}
 });
 
 modelRoutine(sequelize);
+modelUser(sequelize);
 
 
 const basename = path.basename(__filename);
@@ -36,6 +39,8 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
+const { Routine } = sequelize.models;
+const { User } = sequelize.models;
 
 
 // Aca vendrian las relaciones
