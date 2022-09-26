@@ -24,9 +24,6 @@ module.exports = (sequelize) => {
         password:{
             type: DataTypes.STRING,
             allowNull:false,
-        },
-        routines:{
-            type: DataTypes.ARRAY(DataTypes.STRING)
         }
   });
 };

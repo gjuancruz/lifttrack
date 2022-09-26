@@ -1,10 +1,14 @@
 const { Router } = require('express');
 const router = Router();
-const {User} = require('../db');
+const {User, Routine} = require('../db');
 
 router.get("/", async(req, res)=>{
     try {
-        const users = await User.findAll()
+        const users = await User.findAll({
+            include: {
+            model: Routine
+        }
+     })
         res.json(users)
     } catch (error) {
         console.log(error.message);
