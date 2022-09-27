@@ -27,6 +27,22 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put("/update", async(req, res)=>{
+    try {
+        const { title, exercises, userId, routineId} = req.body
+    const updatedRoutine = await Routine.findByPk(routineId)
+    updatedRoutine.title = title
+    updatedRoutine.exercises = exercises
+
+    await updatedRoutine.save()
+
+    res.json(updatedRoutine)
+    } catch (error) {
+        console.log(error.message);
+        return res.status(404).send(error.message );
+    }
+})
+
 router.get("/", async(req, res)=>{
     try {
         const routines = await Routine.findAll()
@@ -36,4 +52,6 @@ router.get("/", async(req, res)=>{
         return res.status(404).send(error.message );
     }
 })
+
+
 module.exports = router;
