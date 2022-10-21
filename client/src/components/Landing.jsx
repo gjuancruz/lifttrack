@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
+import { useDispatch, useSelector } from "react-redux";
+import { Text, View, Image, TextInput, TouchableOpacity as Button } from 'react-native'
 import { Link } from "react-router-native";
 import Constants from 'expo-constants'
 import { getAllUsersAPI } from "../redux/slices/users";
@@ -13,6 +13,8 @@ const Landing = () => {
     useEffect(() => {
         dispatch(getAllUsersAPI())
     }, [])
+    const allUsers = useSelector(state => state.users.allUsers)
+    
     return (
         <View style={{ marginTop: Constants.statusBarHeight }}>
             <Text>Welcome</Text>
@@ -36,15 +38,28 @@ const Landing = () => {
                 />
             </View>
 
-            <TouchableOpacity >
+
+            <Button >
                 <Text>LOGIN</Text>
-            </TouchableOpacity>
+            </Button>
             <Link
                 to="/register">
 
                 <Text>regitrate papy</Text>
 
             </Link>
+
+            <View>
+                {allUsers.map(e => {
+                    return (
+                        <View>
+                            <Text>{e.username}</Text>
+                            <Text>{e.email}</Text>
+                        </View>
+                    )
+                })}
+
+            </View>
         </View>
 
     )

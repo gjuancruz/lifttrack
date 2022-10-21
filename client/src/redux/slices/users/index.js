@@ -3,37 +3,41 @@ import axios from "axios"
 
 export const userSlice = createSlice({
     name: 'users',
-    initialState:{
+    initialState: {
         allUsers: []
     },
-    reducers:{
-        getAllUsers: (state, action) =>{
+    reducers: {
+        getAllUsers: (state, action) => {
             state.allUsers = action.payload
         }
     }
 })
 
-const {getAllUsers} = userSlice.actions
+const { getAllUsers } = userSlice.actions
 
-export function getAllUsersAPI(){
-    return async function(dispatch){
-        let users = await axios.get("http://localhost:3001/admin");
-        console.log(users)
-       return dispatch(getAllUsers(users.data))
+export function getAllUsersAPI() {
+    return async function (dispatch) {
+        try {
+            let users = await axios.get("http://192.168.1.12:3001/admin");
+            return dispatch(getAllUsers(users.data))
+        } catch (error) {
+            return console.log('flow', (error))
+        }
+
     }
 }
 
 
-export function register(payload){
-    return async function(){
+export function register(payload) {
+    return async function () {
         try {
-            var json = await axios.post(`http://localhost:3001/auth/register`, payload)
+            var json = await axios.post(`http://192.168.1.12:3001/auth/register`, payload)
             return json
         } catch (error) {
-          return error
+            return console.log('adolf', error)
         }
     }
-  }
-  
+}
+
 
 export default userSlice.reducer
