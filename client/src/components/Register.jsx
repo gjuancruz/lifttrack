@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import { Text, View, Image, TextInput, TouchableOpacity } from 'react-native'
 import { Link } from "react-router-native";
 import Constants from 'expo-constants'
-import { getAllUsersAPI } from "../redux/slices/users";
 
-const Landing = () => {
+const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const dispatch = useDispatch()
-
-    useEffect(() => {
-        dispatch(getAllUsersAPI())
-    }, [])
     return (
         <View style={{ marginTop: Constants.statusBarHeight }}>
-            <Text>Welcome</Text>
+            <Text>Register</Text>
             <Image source={require('../../assets/logo.png')} />
             <View>
                 <TextInput
 
-                    placeholder="Email."
+                    placeholder="Email"
                     placeholderTextColor="#003f5c"
                     onChangeText={(email) => setEmail(email)}
                 />
@@ -29,25 +22,30 @@ const Landing = () => {
             <View >
                 <TextInput
 
-                    placeholder="Password."
+                    placeholder="Password"
                     placeholderTextColor="#003f5c"
                     secureTextEntry={true}
                     onChangeText={(password) => setPassword(password)}
                 />
             </View>
 
+            <View>
+
             <TouchableOpacity >
-                <Text>LOGIN</Text>
+                <Text>Register</Text>
             </TouchableOpacity>
-            <Link
-                to="/register">
+            </View>
+            <View>
+            <TouchableOpacity>
 
-                <Text>regitrate papy</Text>
-
+            <Link to='/' underlayColor="#f0f4f7">
+                <Text>aaaaaaaaa</Text>
             </Link>
+            </TouchableOpacity>
+            </View>
         </View>
 
     )
 }
 
-export default Landing
+export default Register
