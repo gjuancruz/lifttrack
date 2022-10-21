@@ -23,4 +23,17 @@ export function getAllUsersAPI(){
     }
 }
 
+
+export function register(payload){
+    return async function(){
+        try {
+            var json = await axios.post(`http://localhost:3001/auth/register`, payload)
+            return json
+        } catch (error) {
+          return error
+        }
+    }
+  }
+  
+
 export default userSlice.reducer
