@@ -12,19 +12,21 @@ const Test = () => {
     const [routineReps, setRoutineReps] = useState()
     const [routineFull, setRoutineFull] = useState([])
 
-    const handleExercises = () =>{
+    const handleExercises = () => {
         setRoutineFull(
-            [...routineFull, 
-            {exercise: routineExercise,
-            reps: routineReps}]
+            [...routineFull,
+            {
+                exercise: routineExercise,
+                reps: routineReps
+            }]
         )
     }
 
-   const handleSubmit = ()=>{
+    const handleSubmit = () => {
         dispatch(postRoutine({
-            title:routineTitle,
-            exercises:routineFull,
-            userId:'0a9b75d7-4399-41ed-84fc-de94363e32d7'
+            title: routineTitle,
+            exercises: routineFull,
+            userId: '0a9b75d7-4399-41ed-84fc-de94363e32d7'
         }))
     }
 
@@ -53,17 +55,17 @@ const Test = () => {
                 />
             </View>
             <View>
-            <Button onPress={() => handleExercises()}>
-                <Text>add</Text>
-            </Button>
-        </View>
-        <View>
-            <Button onPress={() => handleSubmit()}>
-                <Text>press</Text>
-            </Button>
-        </View>
+                <Button onPress={() => handleExercises()}>
+                    <Text>add</Text>
+                </Button>
+            </View>
             <View>
-            <Link
+                <Button onPress={() => handleSubmit()}>
+                    <Text>press</Text>
+                </Button>
+            </View>
+            <View>
+                <Link
                     to="/">
 
                     <Text>back</Text>
