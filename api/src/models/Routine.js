@@ -16,7 +16,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     exercises:{
-      type: DataTypes.JSON
+      type: DataTypes.ARRAY(DataTypes.JSON)
     }
   });
 };
