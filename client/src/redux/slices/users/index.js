@@ -39,5 +39,15 @@ export function register(payload) {
     }
 }
 
+export function postRoutine(payload){
+    return async function(){
+        try {
+            var json = await axios.post(`http://192.168.1.12:3001/routines`, payload)
+            return json
+        } catch (error) {
+            console.log(error)
+        }
+    }
+  }
 
 export default userSlice.reducer

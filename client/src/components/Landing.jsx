@@ -14,7 +14,7 @@ const Landing = () => {
         dispatch(getAllUsersAPI())
     }, [])
     const allUsers = useSelector(state => state.users.allUsers)
-    
+
     return (
         <View style={{ marginTop: Constants.statusBarHeight }}>
             <Text>Welcome</Text>
@@ -58,6 +58,13 @@ const Landing = () => {
                         </View>
                     )
                 })}
+
+                <Link
+                    to="/test">
+
+                    <Text>test</Text>
+
+                </Link>
 
             </View>
         </View>
