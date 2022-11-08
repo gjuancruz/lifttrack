@@ -39,6 +39,19 @@ export function register(payload) {
     }
 }
 
+export function login(payload){
+    return async function(){
+        try {
+            const data = await axios.post('http://192.168.1.12:3001/auth/login', payload);
+            console.log(data)
+        if(data.data.token) {
+            localStorage.setItem('sw-token', data.data.token)
+        }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+}
 export function postRoutine(payload){
     return async function(){
         try {

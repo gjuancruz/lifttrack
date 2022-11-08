@@ -62,7 +62,7 @@ router.post('/login', async (req, res) => {
 
         
 
-        return res.status(200).json({ token: token});
+        return res.status(200).json({ token: token, id: user.id});
     } catch (error) {
         console.log(error);
         return res.status(400).send('Error al iniciar sesión');

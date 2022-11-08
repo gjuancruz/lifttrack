@@ -3,12 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { Text, View, Image, TextInput, TouchableOpacity as Button, StyleSheet, TouchableOpacity } from 'react-native'
 import { Link } from "react-router-native";
 import Constants from 'expo-constants'
-import { getAllUsersAPI } from "../redux/slices/users";
+import { getAllUsersAPI, login } from "../redux/slices/users";
 import { StatusBar } from "expo-status-bar";
+
 const Landing = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
     const dispatch = useDispatch()
+
+    const handleSubmit = () => {
+        dispatch(login({ 'email': email, 'password': password }));
+    };
 
     useEffect(() => {
         dispatch(getAllUsersAPI())
@@ -39,7 +45,7 @@ const Landing = () => {
                 />
             </View>
 
-            <Button style={styles.loginBtn} >
+            <Button style={styles.loginBtn} onPress={()=> handleSubmit()} >
                 <Text>LOGIN</Text>
             </Button>
 
