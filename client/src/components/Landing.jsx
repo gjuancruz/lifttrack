@@ -5,15 +5,25 @@ import { Link } from "react-router-native";
 import Constants from 'expo-constants'
 import { getAllUsersAPI, login } from "../redux/slices/users";
 import { StatusBar } from "expo-status-bar";
+import {useNavigate} from 'react-router-native'
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 
 const Landing = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
     const dispatch = useDispatch()
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         dispatch(login({ 'email': email, 'password': password }));
+        const token = await AsyncStorage.getItem('sw-token')
+        if(token){ 
+            navigate("/test")
+        console.log(token)
+        }
     };
 
     useEffect(() => {

@@ -4,6 +4,7 @@ import Constants from 'expo-constants'
 import { Link } from "react-router-native";
 import { useDispatch } from "react-redux";
 import { postRoutine } from "../redux/slices/users";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Test = () => {
     const dispatch = useDispatch()
@@ -29,7 +30,9 @@ const Test = () => {
             userId: '0a9b75d7-4399-41ed-84fc-de94363e32d7'
         }))
     }
-
+    const handleLogOut = async() =>{
+        await AsyncStorage.removeItem('sw-token')
+    }
     return (
         <View style={{ marginTop: Constants.statusBarHeight }}>
             <Text>test</Text>
@@ -62,6 +65,11 @@ const Test = () => {
             <View>
                 <Button onPress={() => handleSubmit()}>
                     <Text>press</Text>
+                </Button>
+            </View>
+            <View>
+                <Button onPress={() => handleLogOut()}>
+                    <Text>logout</Text>
                 </Button>
             </View>
             <View>

@@ -1,5 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { useDispatch } from "react-redux";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const userSlice = createSlice({
     name: 'users',
@@ -43,12 +45,11 @@ export function login(payload){
     return async function(){
         try {
             const data = await axios.post('http://192.168.1.12:3001/auth/login', payload);
-            console.log(data)
         if(data.data.token) {
-            localStorage.setItem('sw-token', data.data.token)
+          await AsyncStorage.setItem('sw-token', data.data.token)
         }
         } catch (error) {
-            console.log(error)
+            console.log('wek', error)
         }
     }
 }
