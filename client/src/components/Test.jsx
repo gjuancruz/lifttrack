@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Text, View, Image, TextInput, TouchableOpacity as Button } from 'react-native'
 import Constants from 'expo-constants'
 import { Link } from "react-router-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postRoutine } from "../redux/slices/users";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -12,7 +12,7 @@ const Test = () => {
     const [routineExercise, setRoutineExercise] = useState({})
     const [routineReps, setRoutineReps] = useState()
     const [routineFull, setRoutineFull] = useState([])
-
+    const userId = useSelector((state) => state.users.currentUserId)
     const handleExercises = () => {
         setRoutineFull(
             [...routineFull,
@@ -27,7 +27,7 @@ const Test = () => {
         dispatch(postRoutine({
             title: routineTitle,
             exercises: routineFull,
-            userId: '0a9b75d7-4399-41ed-84fc-de94363e32d7'
+            userId: userId
         }))
     }
     const handleLogOut = async() =>{

@@ -6,11 +6,15 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export const userSlice = createSlice({
     name: 'users',
     initialState: {
-        allUsers: []
+        allUsers: [],
+        currentUserId: ''
     },
     reducers: {
         getAllUsers: (state, action) => {
             state.allUsers = action.payload
+        },
+        getUserId: (state, action) => {
+            state.currentUserId = action.payload
         }
     }
 })
@@ -20,7 +24,7 @@ const { getAllUsers } = userSlice.actions
 export function getAllUsersAPI() {
     return async function (dispatch) {
         try {
-            let users = await axios.get("http://192.168.1.12:3001/admin");
+            let users = await axios.get("http://192.168.1.17:3001/admin");
             return dispatch(getAllUsers(users.data))
         } catch (error) {
             return console.log('flow', (error))
@@ -30,10 +34,11 @@ export function getAllUsersAPI() {
 }
 
 
+
 export function register(payload) {
     return async function () {
         try {
-            var json = await axios.post(`http://192.168.1.12:3001/auth/register`, payload)
+            var json = await axios.post(`http://192.168.1.17:3001/auth/register`, payload)
             return json
         } catch (error) {
             return console.log('adolf', error)
@@ -41,27 +46,30 @@ export function register(payload) {
     }
 }
 
-export function login(payload){
-    return async function(){
+const { getUserId } = userSlice.actions
+
+export function login(payload) {
+    return async function (dispatch) {
         try {
-            const data = await axios.post('http://192.168.1.12:3001/auth/login', payload);
-        if(data.data.token) {
-          await AsyncStorage.setItem('sw-token', data.data.token)
-        }
+            const data = await axios.post('http://192.168.1.17:3001/auth/login', payload);
+            if (data.data.token) {
+                await AsyncStorage.setItem('sw-token', data.data.token)
+            }
+            return dispatch(getUserId(data.data.id))
         } catch (error) {
             console.log('wek', error)
         }
     }
 }
-export function postRoutine(payload){
-    return async function(){
+export function postRoutine(payload) {
+    return async function () {
         try {
-            var json = await axios.post(`http://192.168.1.12:3001/routines`, payload)
+            var json = await axios.post(`http://192.168.1.17:3001/routines`, payload)
             return json
         } catch (error) {
             console.log(error)
         }
     }
-  }
+}
 
 export default userSlice.reducer
