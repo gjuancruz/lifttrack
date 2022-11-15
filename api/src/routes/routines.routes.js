@@ -68,4 +68,22 @@ router.delete("/", async(req,res)=>{
         return res.status(404).send(error.message );
     }
 })
+
+router.get('/user', async (req, res) => {
+    try {
+        const {userId} = req.body
+
+        const user = await User.findOne({
+            where: {id: userId},
+            include: {
+                model: Routine
+            }
+        })
+        res.json(user)
+    } catch (error) {
+        console.log(error.message);
+        return res.status(404).send(error.message );
+    }
+})
+
 module.exports = router;

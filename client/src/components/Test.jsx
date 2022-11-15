@@ -81,14 +81,14 @@ const Test = () => {
                     <Text>logout</Text>
                 </Button>
             
-            <Button style={styles.btn}>
                 <Link
                     to="/">
+            {/* <Button style={styles.btn}> */}
 
                     <Text>back</Text>
 
+            {/* </Button> */}
                 </Link>
-            </Button>
         </View>
     )
 }
