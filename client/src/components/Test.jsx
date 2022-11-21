@@ -68,6 +68,9 @@ const Test = () => {
                 />
             </View>
             </View>
+            <View>
+                <Text>{routineFull.map(e=>{return(e.exercise + ' ' + e.reps + '\n')})}</Text>
+            </View>
 
             
                 <Button style={styles.btn}
