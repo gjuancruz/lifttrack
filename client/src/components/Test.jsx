@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, Image, TextInput, TouchableOpacity as Button, StyleSheet } from 'react-native'
 import Constants from 'expo-constants'
-import { Link } from "react-router-native";
+import { Link, useParams } from "react-router-native";
 import { useDispatch, useSelector } from "react-redux";
-import { postRoutine } from "../redux/slices/users";
+import { getRoutine, postRoutine } from "../redux/slices/users";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Test = () => {
@@ -13,6 +13,12 @@ const Test = () => {
     const [routineReps, setRoutineReps] = useState()
     const [routineFull, setRoutineFull] = useState([])
     const userId = useSelector((state) => state.users.currentUserId)
+    const idParams = useParams()
+    console.log(idParams)
+    // useEffect(() => {
+    //     dispatch(getRoutine(idParams.id))
+    // }, [])
+
     const handleExercises = () => {
         setRoutineFull(
             [...routineFull,
@@ -86,6 +92,14 @@ const Test = () => {
             {/* <Button style={styles.btn}> */}
 
                     <Text>back</Text>
+
+            {/* </Button> */}
+                </Link>
+
+                <Link to={`/routines/${userId}`}>
+            {/* <Button style={styles.btn}> */}
+
+                   <Text>routines</Text> 
 
             {/* </Button> */}
                 </Link>

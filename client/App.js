@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import store from './src/redux';
 import Test from './src/components/Test';
 import { NavigationContainer } from '@react-navigation/native';
+import RoutinesPage from './src/components/RoutinesPage';
 
 export default function App() {
   return (
@@ -14,8 +15,8 @@ export default function App() {
           <Routes>
             <Route exact path="/" element={<Landing />} />
             <Route exact path="/register" element={<Register />} />
-            <Route exact path="/register" element={<Register />} />
             <Route exact path="/test" element={<Test />} />
+            <Route exact path="/routines/:id" element={<RoutinesPage />} />
           </Routes>
         </NativeRouter>
       </NavigationContainer>

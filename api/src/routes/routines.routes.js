@@ -69,21 +69,33 @@ router.delete("/", async(req,res)=>{
     }
 })
 
-router.get('/user', async (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const {userId} = req.body
-
+        const idParams = req.params.id
+        console.log('waskeira', idParams)
         const user = await User.findOne({
-            where: {id: userId},
+            where: {id: idParams},
             include: {
                 model: Routine
             }
         })
         res.json(user)
     } catch (error) {
-        console.log(error.message);
-        return res.status(404).send(error.message );
+        console.log(error);
+        return res.send(error);
     }
 })
 
+// router.get('/:id', async (req, res) => {
+//     try {
+//         const idParams = req.params.id
+//         console.log('waskeira', idParams)
+//         if(idParams){
+//         const user = 'aaaaaa' + idParams
+//         res.json(user)}
+//     } catch (error) {
+//         console.log(error);
+//         return res.send(error);
+//     }
+// })
 module.exports = router;
